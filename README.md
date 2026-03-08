@@ -21,7 +21,7 @@ API REST pour connecter agriculteurs et acheteurs à Madagascar, avec support US
 
 ## Installation locale
 
-git clone https://github.com/TON_USERNAME/agri-marketplace.git
+git clone https://github.com/miradojonas/agri-marketplace.git
 cd agri-marketplace
 composer install
 cp .env.example .env
@@ -48,4 +48,4 @@ php artisan test
 
 ## Auteur
 
-Mirado — Projet portfolio 2026
+Mirado — Portofolio : mirado.vercel.app
