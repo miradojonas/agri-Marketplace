@@ -11,13 +11,13 @@ API REST pour connecter agriculteurs et acheteurs à Madagascar, avec support US
 
 ## Fonctionnalités
 
-- ✅ Inscription / Connexion (Sanctum)
-- ✅ Gestion des produits (CRUD agriculteur)
-- ✅ Catégories de produits
-- ✅ Commandes (acheteur → agriculteur)
-- ✅ Prix du marché en temps réel
-- ✅ Interface USSD pour zones sans internet
-- ✅ Notifications SMS
+- Inscription / Connexion (Sanctum)
+- Gestion des produits (CRUD agriculteur)
+- Catégories de produits
+- Commandes (acheteur → agriculteur)
+- Prix du marché en temps réel
+- Interface USSD pour zones sans internet
+- Notifications SMS
 
 ## Installation locale
 
