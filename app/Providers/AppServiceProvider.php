@@ -31,8 +31,8 @@ class AppServiceProvider extends ServiceProvider
             DB::prohibitDestructiveCommands();
         }
 
-        // ── Sécurité Eloquent ──
-        Model::shouldBeStrict(! $this->app->isProduction());
+        // ── Sécurité Eloquent (local uniquement, pas en testing) ──
+        Model::shouldBeStrict($this->app->environment('local'));
 
         // ── Rate limiters ──
         RateLimiter::for('api', function (Request $request) {
