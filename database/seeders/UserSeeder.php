@@ -39,11 +39,47 @@ class UserSeeder extends Seeder
             'region'   => 'Itasy',
         ]);
 
-        // Acheteur
+        User::create([
+            'name'     => 'Andry Nirina',
+            'email'    => 'andry@example.mg',
+            'phone'    => '+261340000005',
+            'role'     => 'farmer',
+            'password' => Hash::make('password'),
+            'region'   => 'Alaotra-Mangoro',
+        ]);
+
+        User::create([
+            'name'     => 'Fara Lova',
+            'email'    => 'fara@example.mg',
+            'phone'    => '+261340000006',
+            'role'     => 'farmer',
+            'password' => Hash::make('password'),
+            'region'   => 'SAVA',
+        ]);
+
+        User::create([
+            'name'     => 'Solo Haja',
+            'email'    => 'solo@example.mg',
+            'phone'    => '+261340000007',
+            'role'     => 'farmer',
+            'password' => Hash::make('password'),
+            'region'   => 'Atsinanana',
+        ]);
+
+        // Acheteurs
         User::create([
             'name'     => 'Restaurant Colbert',
             'email'    => 'colbert@example.mg',
             'phone'    => '+261340000004',
+            'role'     => 'buyer',
+            'password' => Hash::make('password'),
+            'region'   => 'Analamanga',
+        ]);
+
+        User::create([
+            'name'     => 'Hôtel Sakamanga',
+            'email'    => 'sakamanga@example.mg',
+            'phone'    => '+261340000008',
             'role'     => 'buyer',
             'password' => Hash::make('password'),
             'region'   => 'Analamanga',

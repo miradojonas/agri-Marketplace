@@ -70,6 +70,6 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 // ─────────────────────────────────────────
-// USSD (pas de token, sécurisé par IP)
+// USSD (rate-limité par IP)
 // ─────────────────────────────────────────
-Route::post('/ussd', [UssdController::class, 'handle']);
+Route::middleware('throttle:ussd')->post('/ussd', [UssdController::class, 'handle']);
