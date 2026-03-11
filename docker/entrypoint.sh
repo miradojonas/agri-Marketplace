@@ -5,6 +5,12 @@ echo "🌾 Agri-Marketplace — Démarrage du conteneur…"
 
 cd /var/www/html
 
+# Ensure .env file exists (Railway injects env vars at runtime, not via .env)
+if [ ! -f .env ]; then
+    echo "📄 Création du fichier .env…"
+    touch .env
+fi
+
 # Generate app key if not set
 if [ -z "$APP_KEY" ]; then
     echo "⚙️  Génération de la clé d'application…"
