@@ -34,7 +34,7 @@ RUN composer install \
 FROM php:8.2-fpm-alpine
 
 # Install system deps + PHP extensions
-RUN apk add --no-cache \
+RUN apk update && apk add --no-cache \
         nginx \
         supervisor \
         curl \
@@ -45,7 +45,7 @@ RUN apk add --no-cache \
         libzip-dev \
         icu-dev \
         mysql-client \
-        postgresql-client \
+        postgresql-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) \
         pdo_mysql \
