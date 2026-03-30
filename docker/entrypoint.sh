@@ -21,21 +21,38 @@ if [ -z "$APP_KEY" ]; then
     php artisan key:generate --force
 fi
 
-# Wait for MySQL to be ready
+# Wait for DB to be ready
 if [ -n "$DB_HOST" ]; then
-    echo "⏳ Attente de MySQL ($DB_HOST:${DB_PORT:-3306})…"
-    max_tries=30
-    counter=0
-    until mysql -h "$DB_HOST" -P "${DB_PORT:-3306}" -u "$DB_USERNAME" -p"$DB_PASSWORD" -e "SELECT 1" > /dev/null 2>&1; do
-        counter=$((counter + 1))
-        if [ $counter -ge $max_tries ]; then
-            echo "❌ MySQL non disponible après ${max_tries} tentatives. Abandon."
-            exit 1
-        fi
-        echo "   Tentative $counter/$max_tries…"
-        sleep 2
-    done
-    echo "✅ MySQL est prêt !"
+    if [ "$DB_CONNECTION" = "pgsql" ]; then
+        echo "⏳ Attente de PostgreSQL ($DB_HOST:${DB_PORT:-5432})…"
+        export PGPASSWORD="$DB_PASSWORD"
+        max_tries=30
+        counter=0
+        until psql -h "$DB_HOST" -p "${DB_PORT:-5432}" -U "$DB_USERNAME" -d "$DB_DATABASE" -c '\q' > /dev/null 2>&1; do
+            counter=$((counter + 1))
+            if [ $counter -ge $max_tries ]; then
+                echo "❌ PostgreSQL non disponible après ${max_tries} tentatives. Abandon."
+                exit 1
+            fi
+            echo "   Tentative $counter/$max_tries…"
+            sleep 2
+        done
+        echo "✅ PostgreSQL est prêt !"
+    elif [ "$DB_CONNECTION" = "mysql" ]; then
+        echo "⏳ Attente de MySQL ($DB_HOST:${DB_PORT:-3306})…"
+        max_tries=30
+        counter=0
+        until mysql -h "$DB_HOST" -P "${DB_PORT:-3306}" -u "$DB_USERNAME" -p"$DB_PASSWORD" -e "SELECT 1" > /dev/null 2>&1; do
+            counter=$((counter + 1))
+            if [ $counter -ge $max_tries ]; then
+                echo "❌ MySQL non disponible après ${max_tries} tentatives. Abandon."
+                exit 1
+            fi
+            echo "   Tentative $counter/$max_tries…"
+            sleep 2
+        done
+        echo "✅ MySQL est prêt !"
+    fi
 fi
 
 # Run migrations
