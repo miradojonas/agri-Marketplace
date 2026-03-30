@@ -1,7 +1,11 @@
 #!/bin/sh
 set -e
 
-echo "🌾 Agri-Marketplace — Démarrage du conteneur…"
+# Set Nginx port from environment variable
+export PORT=${PORT:-80}
+sed -i "s/__PORT__/$PORT/g" /etc/nginx/http.d/default.conf
+
+echo "🌾 Agri-Marketplace — Démarrage du conteneur sur le port $PORT…"
 
 cd /var/www/html
 
