@@ -36,6 +36,7 @@ php artisan storage:link --force 2>/dev/null || true
 
 # Fix permissions
 chown -R www-data:www-data storage bootstrap/cache
+chmod -R 775 storage bootstrap/cache
 
 echo "✅ Agri-Marketplace est prêt !"
 
